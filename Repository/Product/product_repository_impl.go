@@ -49,8 +49,8 @@ func (repository *productRepositoryImpl) FindById(ctx context.Context, id int32)
 }
 
 func (repository *productRepositoryImpl) FindAllProductByBrandId(ctx context.Context, id int32) ([]Model.ProductModel, error) {
-	script := "SELECT productId, productName, productPrice, BrandId FROM products WHERE brandId = ? LIMIT 1"
-	rows, err := repository.DB.QueryContext(ctx, script)
+	script := "SELECT productId, productName, productPrice, brandId FROM products WHERE brandId = ?"
+	rows, err := repository.DB.QueryContext(ctx, script, id)
 	if err != nil {
 		return nil, err
 	}
