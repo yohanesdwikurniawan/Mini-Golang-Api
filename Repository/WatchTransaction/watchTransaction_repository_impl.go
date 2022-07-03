@@ -12,7 +12,7 @@ type watchTransactionRepositoryImpl struct {
 	DB *sql.DB
 }
 
-func NewWatchTransactionRepository(db *sql.DB) WatchTransaction {
+func NewWatchTransactionRepository(db *sql.DB) WatchTransactionRepository {
 	return &watchTransactionRepositoryImpl{DB: db}
 }
 
