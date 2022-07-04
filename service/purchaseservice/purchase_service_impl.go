@@ -6,7 +6,7 @@ import (
 	"Catalys-Tech-Backend-Test/model/domain"
 	"Catalys-Tech-Backend-Test/model/request"
 	"Catalys-Tech-Backend-Test/model/response"
-	"Catalys-Tech-Backend-Test/repository/purchase_repository"
+	"Catalys-Tech-Backend-Test/repository/purchaserepository"
 	"context"
 	"database/sql"
 
@@ -14,12 +14,12 @@ import (
 )
 
 type PurchaseServiceImpl struct {
-	PurchaseRepository purchase_repository.PurchaseRepository
+	PurchaseRepository purchaserepository.PurchaseRepository
 	DB                 *sql.DB
 	Validate           *validator.Validate
 }
 
-func NewPurchaseService(purchaseRepository purchase_repository.PurchaseRepository, DB *sql.DB, validate *validator.Validate) PurchaseService {
+func NewPurchaseService(purchaseRepository purchaserepository.PurchaseRepository, DB *sql.DB, validate *validator.Validate) PurchaseService {
 	return &PurchaseServiceImpl{
 		PurchaseRepository: purchaseRepository,
 		DB:                 DB,

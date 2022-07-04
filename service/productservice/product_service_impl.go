@@ -6,7 +6,7 @@ import (
 	"Catalys-Tech-Backend-Test/model/domain"
 	"Catalys-Tech-Backend-Test/model/request"
 	"Catalys-Tech-Backend-Test/model/response"
-	"Catalys-Tech-Backend-Test/repository/product_repository"
+	"Catalys-Tech-Backend-Test/repository/productrepository"
 	"context"
 	"database/sql"
 
@@ -14,12 +14,12 @@ import (
 )
 
 type ProductServiceImpl struct {
-	ProductRepository product_repository.ProductRepository
+	ProductRepository productrepository.ProductRepository
 	DB                *sql.DB
 	Validate          *validator.Validate
 }
 
-func NewProductService(productRepository product_repository.ProductRepository, DB *sql.DB, validate *validator.Validate) ProductService {
+func NewProductService(productRepository productrepository.ProductRepository, DB *sql.DB, validate *validator.Validate) ProductService {
 	return &ProductServiceImpl{
 		ProductRepository: productRepository,
 		DB:                DB,

@@ -6,7 +6,7 @@ import (
 	"Catalys-Tech-Backend-Test/model/helper"
 	"Catalys-Tech-Backend-Test/model/request"
 	"Catalys-Tech-Backend-Test/model/response"
-	"Catalys-Tech-Backend-Test/repository/brand_repository"
+	"Catalys-Tech-Backend-Test/repository/brandrepository"
 	"context"
 	"database/sql"
 
@@ -14,12 +14,12 @@ import (
 )
 
 type BrandServiceImpl struct {
-	BrandRepository brand_repository.BrandRepository
+	BrandRepository brandrepository.BrandRepository
 	DB              *sql.DB
 	Validate        *validator.Validate
 }
 
-func NewBrandService(brandRepository brand_repository.BrandRepository, DB *sql.DB, validate *validator.Validate) BrandService {
+func NewBrandService(brandRepository brandrepository.BrandRepository, DB *sql.DB, validate *validator.Validate) BrandService {
 	return &BrandServiceImpl{
 		BrandRepository: brandRepository,
 		DB:              DB,
