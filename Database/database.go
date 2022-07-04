@@ -6,24 +6,13 @@ import (
 )
 
 func InitDatabase(name string) {
-
-	db, err := sql.Open("mysql", "admin:admin@tcp(localhost:3306)/")
+	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/")
 	if err != nil {
 		panic(err)
 	}
 	defer db.Close()
 
 	_, err = db.Exec("CREATE DATABASE " + name)
-	if err != nil {
-		panic(err)
-	}
-
-	_, err = db.Exec("USE " + name)
-	if err != nil {
-		panic(err)
-	}
-
-	_, err = db.Exec("CREATE TABLE example ( id integer, data varchar(32) )")
 	if err != nil {
 		panic(err)
 	}

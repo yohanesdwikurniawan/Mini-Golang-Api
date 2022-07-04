@@ -16,3 +16,7 @@ func TestOpenConnection(t *testing.T) {
 
 	// gunakan DB
 }
+
+func TestCreateDatabase(t *testing.T){
+	InitDatabase("InitDb")
+}
