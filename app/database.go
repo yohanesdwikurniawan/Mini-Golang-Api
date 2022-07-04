@@ -1,6 +1,7 @@
-package database
+package app
 
 import (
+	"Catalys-Tech-Backend-Test/helper"
 	"database/sql"
 	"time"
 )
@@ -20,9 +21,7 @@ func InitDatabase(name string) {
 
 func GetConnection(name string) *sql.DB {
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/"+name+"?parseTime=true")
-	if err != nil {
-		panic(err)
-	}
+	helper.PanicIfError(err)
 
 	db.SetMaxIdleConns(10)
 	db.SetMaxOpenConns(100)

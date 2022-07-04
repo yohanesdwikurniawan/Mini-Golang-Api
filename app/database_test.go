@@ -1,4 +1,4 @@
-package database
+package app
 
 import (
 	"database/sql"
@@ -17,6 +17,6 @@ func TestOpenConnection(t *testing.T) {
 	// gunakan DB
 }
 
-func TestCreateDatabase(t *testing.T){
+func TestCreateDatabase(t *testing.T) {
 	InitDatabase("InitDb")
 }
