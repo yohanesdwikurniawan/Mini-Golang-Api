@@ -1,4 +1,4 @@
-package brand_service
+package brandservice
 
 import (
 	"Catalys-Tech-Backend-Test/helper"

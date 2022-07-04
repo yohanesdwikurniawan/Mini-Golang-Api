@@ -1,4 +1,4 @@
-package product_repository
+package productrepository
 
 import (
 	"Catalys-Tech-Backend-Test/helper"
@@ -46,7 +46,7 @@ func (repository *ProductRepositoryImpl) FindById(ctx context.Context, tx *sql.T
 	}
 }
 
-func (repository *ProductRepositoryImpl) FindAllProductByBrandId(ctx context.Context, tx *sql.Tx, brandId int32) ([]domain.Product, error) {
+func (repository *ProductRepositoryImpl) FindAllProductByBrandId(ctx context.Context, tx *sql.Tx, brandId int32) []domain.Product {
 	script := "SELECT id, name, price, brandId FROM products WHERE brandId = ?"
 	rows, err := tx.QueryContext(ctx, script, brandId)
 	helper.PanicIfError(err)
@@ -59,5 +59,5 @@ func (repository *ProductRepositoryImpl) FindAllProductByBrandId(ctx context.Con
 		helper.PanicIfError(err)
 		products = append(products, product)
 	}
-	return products, nil
+	return products
 }

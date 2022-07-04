@@ -1,4 +1,4 @@
-package product_repository
+package productrepository
 
 import (
 	"Catalys-Tech-Backend-Test/model/domain"

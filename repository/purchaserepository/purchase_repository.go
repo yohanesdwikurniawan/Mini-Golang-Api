@@ -1,4 +1,4 @@
-package purchase_repository
+package purchaserepository
 
 import (
 	"Catalys-Tech-Backend-Test/model/domain"

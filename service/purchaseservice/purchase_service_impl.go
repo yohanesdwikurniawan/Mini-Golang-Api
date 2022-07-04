@@ -1,4 +1,4 @@
-package purchase_service
+package purchaseservice
 
 import (
 	"Catalys-Tech-Backend-Test/exception"

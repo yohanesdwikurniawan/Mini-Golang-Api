@@ -1,4 +1,4 @@
-package brand_repository
+package brandrepository
 
 import (
 	"Catalys-Tech-Backend-Test/helper"

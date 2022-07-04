@@ -1,4 +1,4 @@
-package product_service
+package productservice
 
 import (
 	"Catalys-Tech-Backend-Test/model/request"
