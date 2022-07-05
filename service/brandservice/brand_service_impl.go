@@ -3,14 +3,13 @@ package brandservice
 import (
 	"Catalys-Tech-Backend-Test/helper"
 	"Catalys-Tech-Backend-Test/model/domain"
-	"Catalys-Tech-Backend-Test/model/helper"
 	"Catalys-Tech-Backend-Test/model/request"
 	"Catalys-Tech-Backend-Test/model/response"
 	"Catalys-Tech-Backend-Test/repository/brandrepository"
 	"context"
 	"database/sql"
 
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 )
 
 type BrandServiceImpl struct {

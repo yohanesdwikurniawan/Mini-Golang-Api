@@ -14,7 +14,7 @@ import (
 	"Catalys-Tech-Backend-Test/service/purchaseservice"
 	"net/http"
 
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 )
 
 func main() {
