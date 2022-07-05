@@ -12,13 +12,21 @@ import (
 	"Catalys-Tech-Backend-Test/service/brandservice"
 	"Catalys-Tech-Backend-Test/service/productservice"
 	"Catalys-Tech-Backend-Test/service/purchaseservice"
+	"embed"
 	"net/http"
 
 	"github.com/go-playground/validator/v10"
+	_ "github.com/go-sql-driver/mysql"
 )
 
+//go:embed migrations/*.sql
+var embedMigrations embed.FS
+
 func main() {
-	dbConnection := app.GetConnection("test")
+	app.InitDatabase("initDb")
+	dbConnection := app.GetConnection("initDb")
+	app.RunMigrations(embedMigrations, dbConnection)
+
 	validate := validator.New()
 
 	brandrepository := brandrepository.NewBrandRepository()
@@ -36,7 +44,7 @@ func main() {
 	router := app.AllRouter(brandcontroller, productcontroller, purchasecontroller)
 
 	server := http.Server{
-		Addr:    "localhost:8080",
+		Addr:    "localhost:3000",
 		Handler: router,
 	}
 

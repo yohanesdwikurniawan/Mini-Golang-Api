@@ -15,7 +15,7 @@ func AllRouter(brandcontroller brandcontroller.BrandController,
 	mux.HandleFunc("/api/brands", brandcontroller.Insert)
 	mux.HandleFunc("/api/products", productcontroller.Insert)
 	mux.HandleFunc("/api/products/", productcontroller.FindById)
-	mux.HandleFunc("/api/products/", productcontroller.FindAllProductByBrandId)
+	mux.HandleFunc("/api/all-brand-products/", productcontroller.FindAllProductByBrandId)
 	mux.HandleFunc("/api/purchase", purchasecontroller.Insert)
 	mux.HandleFunc("/api/purchase/", purchasecontroller.FindById)
 

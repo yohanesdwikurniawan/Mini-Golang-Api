@@ -3,7 +3,10 @@ package app
 import (
 	"Catalys-Tech-Backend-Test/helper"
 	"database/sql"
+	"embed"
 	"time"
+
+	"github.com/pressly/goose/v3"
 )
 
 func InitDatabase(name string) {
@@ -13,7 +16,7 @@ func InitDatabase(name string) {
 	}
 	defer db.Close()
 
-	_, err = db.Exec("CREATE DATABASE " + name)
+	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS " + name)
 	if err != nil {
 		panic(err)
 	}
@@ -29,4 +32,17 @@ func GetConnection(name string) *sql.DB {
 	db.SetConnMaxLifetime(60 * time.Minute)
 
 	return db
+}
+
+func RunMigrations(migrations embed.FS, dbConnection *sql.DB)  {
+	
+    goose.SetBaseFS(migrations)
+
+    if err := goose.SetDialect("mysql"); err != nil {
+        panic(err)
+    }
+
+    if err := goose.Up(dbConnection, "migrations"); err != nil {
+        panic(err)
+    }
 }
