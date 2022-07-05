@@ -23,8 +23,8 @@ import (
 var embedMigrations embed.FS
 
 func main() {
-	app.InitDatabase("initDb")
-	dbConnection := app.GetConnection("initDb")
+	app.InitDatabase("root", "root", "localhost", "3306", "initDb")
+	dbConnection := app.GetConnection("root", "root", "localhost", "3306", "initDb")
 	app.RunMigrations(embedMigrations, dbConnection)
 
 	validate := validator.New()

@@ -9,21 +9,21 @@ import (
 	"github.com/pressly/goose/v3"
 )
 
-func InitDatabase(name string) {
-	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/")
+func InitDatabase(user string, password string, hostname string, port string, dbname string) {
+	db, err := sql.Open("mysql", ""+user+":"+password+"@tcp("+hostname+":"+port+")/")
 	if err != nil {
 		panic(err)
 	}
 	defer db.Close()
 
-	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS " + name)
+	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS " + dbname)
 	if err != nil {
 		panic(err)
 	}
 }
 
-func GetConnection(name string) *sql.DB {
-	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/"+name+"?parseTime=true")
+func GetConnection(user string, password string, hostname string, port string, dbname string) *sql.DB {
+	db, err := sql.Open("mysql", ""+user+":"+password+"@tcp("+hostname+":"+port+")/"+dbname+"?parseTime=true")
 	helper.PanicIfError(err)
 
 	db.SetMaxIdleConns(10)
@@ -34,15 +34,15 @@ func GetConnection(name string) *sql.DB {
 	return db
 }
 
-func RunMigrations(migrations embed.FS, dbConnection *sql.DB)  {
-	
-    goose.SetBaseFS(migrations)
+func RunMigrations(migrations embed.FS, dbConnection *sql.DB) {
 
-    if err := goose.SetDialect("mysql"); err != nil {
-        panic(err)
-    }
+	goose.SetBaseFS(migrations)
 
-    if err := goose.Up(dbConnection, "migrations"); err != nil {
-        panic(err)
-    }
+	if err := goose.SetDialect("mysql"); err != nil {
+		panic(err)
+	}
+
+	if err := goose.Up(dbConnection, "migrations"); err != nil {
+		panic(err)
+	}
 }
