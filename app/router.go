@@ -12,12 +12,12 @@ func AllRouter(brandcontroller brandcontroller.BrandController,
 	purchasecontroller purchasecontroller.PurchaseController) *http.ServeMux {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/api/brands", brandcontroller.Insert)
-	mux.HandleFunc("/api/products", productcontroller.Insert)
-	mux.HandleFunc("/api/products/", productcontroller.FindById)
-	mux.HandleFunc("/api/all-brand-products/", productcontroller.FindAllProductByBrandId)
-	mux.HandleFunc("/api/purchase", purchasecontroller.Insert)
-	mux.HandleFunc("/api/purchase/", purchasecontroller.FindById)
+	mux.HandleFunc("/api/brand", brandcontroller.Insert)
+	mux.HandleFunc("/api/product", productcontroller.Insert)
+	mux.HandleFunc("/api/product/", productcontroller.FindById)
+	mux.HandleFunc("/api/product/brand/", productcontroller.FindAllProductByBrandId)
+	mux.HandleFunc("/api/order", purchasecontroller.Insert)
+	mux.HandleFunc("/api/order/", purchasecontroller.FindById)
 
 	return mux
 }
