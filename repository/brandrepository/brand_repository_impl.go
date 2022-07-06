@@ -1,8 +1,8 @@
 package brandrepository
 
 import (
-	"Catalys-Tech-Backend-Test/helper"
-	"Catalys-Tech-Backend-Test/model/domain"
+	"Catalyst-Tech-Backend-Test/helper"
+	"Catalyst-Tech-Backend-Test/model/domain"
 	"context"
 	"database/sql"
 )

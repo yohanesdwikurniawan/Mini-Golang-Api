@@ -1,8 +1,8 @@
 package helper
 
 import (
-	"Catalys-Tech-Backend-Test/model/domain"
-	"Catalys-Tech-Backend-Test/model/response"
+	"Catalyst-Tech-Backend-Test/model/domain"
+	"Catalyst-Tech-Backend-Test/model/response"
 )
 
 func ToOrderResponse(order domain.Order) response.OrderResponse {

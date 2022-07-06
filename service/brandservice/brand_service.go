@@ -1,8 +1,8 @@
 package brandservice
 
 import (
-	"Catalys-Tech-Backend-Test/model/request"
-	"Catalys-Tech-Backend-Test/model/response"
+	"Catalyst-Tech-Backend-Test/model/request"
+	"Catalyst-Tech-Backend-Test/model/response"
 	"context"
 )
 

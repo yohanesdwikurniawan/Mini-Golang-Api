@@ -1,7 +1,7 @@
 package orderrepository
 
 import (
-	"Catalys-Tech-Backend-Test/model/domain"
+	"Catalyst-Tech-Backend-Test/model/domain"
 	"context"
 	"database/sql"
 )

@@ -1,11 +1,11 @@
 package brandservice
 
 import (
-	"Catalys-Tech-Backend-Test/helper"
-	"Catalys-Tech-Backend-Test/model/domain"
-	"Catalys-Tech-Backend-Test/model/request"
-	"Catalys-Tech-Backend-Test/model/response"
-	"Catalys-Tech-Backend-Test/repository/brandrepository"
+	"Catalyst-Tech-Backend-Test/helper"
+	"Catalyst-Tech-Backend-Test/model/domain"
+	"Catalyst-Tech-Backend-Test/model/request"
+	"Catalyst-Tech-Backend-Test/model/response"
+	"Catalyst-Tech-Backend-Test/repository/brandrepository"
 	"context"
 	"database/sql"
 

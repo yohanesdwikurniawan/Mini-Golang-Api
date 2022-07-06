@@ -1,10 +1,10 @@
 package brandcontroller
 
 import (
-	"Catalys-Tech-Backend-Test/helper"
-	"Catalys-Tech-Backend-Test/model/request"
-	"Catalys-Tech-Backend-Test/model/response"
-	"Catalys-Tech-Backend-Test/service/brandservice"
+	"Catalyst-Tech-Backend-Test/helper"
+	"Catalyst-Tech-Backend-Test/model/request"
+	"Catalyst-Tech-Backend-Test/model/response"
+	"Catalyst-Tech-Backend-Test/service/brandservice"
 	"net/http"
 )
 

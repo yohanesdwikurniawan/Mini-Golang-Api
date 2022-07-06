@@ -1,9 +1,9 @@
 package app
 
 import (
-	"Catalys-Tech-Backend-Test/controller/brandcontroller"
-	"Catalys-Tech-Backend-Test/controller/ordercontroller"
-	"Catalys-Tech-Backend-Test/controller/productcontroller"
+	"Catalyst-Tech-Backend-Test/controller/brandcontroller"
+	"Catalyst-Tech-Backend-Test/controller/ordercontroller"
+	"Catalyst-Tech-Backend-Test/controller/productcontroller"
 	"net/http"
 )
 

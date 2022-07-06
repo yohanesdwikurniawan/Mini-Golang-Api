@@ -1,7 +1,7 @@
 package app
 
 import (
-	"Catalys-Tech-Backend-Test/helper"
+	"Catalyst-Tech-Backend-Test/helper"
 	"database/sql"
 	"embed"
 	"time"
