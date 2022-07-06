@@ -17,7 +17,7 @@ func NewOrderRepository() OrderRepository {
 }
 
 func (repository *OrderRepositoryImpl) Insert(ctx context.Context, tx *sql.Tx, order domain.Order) domain.Order {
-	script := "INSERT INTO order(productId, brandId, productQty, unitPrice, totalPrice) VALUES (?, ?, ?, ?, ?)"
+	script := "INSERT INTO orders(productId, brandId, productQty, unitPrice, totalPrice) VALUES (?, ?, ?, ?, ?)"
 	result, err := tx.ExecContext(ctx, script, order.ProductId, order.BrandId, order.ProductQty, order.UnitPrice, order.TotalPrice)
 	helper.PanicIfError(err)
 
@@ -29,14 +29,14 @@ func (repository *OrderRepositoryImpl) Insert(ctx context.Context, tx *sql.Tx, o
 }
 
 func (repository *OrderRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, orderId int32) (domain.Order, error) {
-	script := "SELECT productId, brandId, productQty, unitPrice, totalPrice, createdAt FROM order WHERE id = ? LIMIT 1"
+	script := "SELECT id, productId, brandId, productQty, unitPrice, totalPrice, createdAt FROM orders WHERE id = ? LIMIT 1"
 	rows, err := tx.QueryContext(ctx, script, orderId)
 	helper.PanicIfError(err)
 	defer rows.Close()
 
 	order := domain.Order{}
 	if rows.Next() {
-		err := rows.Scan(&order.Id, &order.ProductId, order.BrandId, order.ProductQty, order.UnitPrice, order.TotalPrice, &order.CreatedAt)
+		err := rows.Scan(&order.Id, &order.ProductId, &order.BrandId, &order.ProductQty, &order.UnitPrice, &order.TotalPrice, &order.CreatedAt)
 		helper.PanicIfError(err)
 		return order, nil
 	} else {
