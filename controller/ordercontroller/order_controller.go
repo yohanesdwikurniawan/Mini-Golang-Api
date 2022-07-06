@@ -1,8 +1,8 @@
-package purchasecontroller
+package ordercontroller
 
 import "net/http"
 
-type PurchaseController interface {
+type OrderController interface {
 	Insert(writer http.ResponseWriter, request *http.Request)
 	FindById(writer http.ResponseWriter, request *http.Request)
 }

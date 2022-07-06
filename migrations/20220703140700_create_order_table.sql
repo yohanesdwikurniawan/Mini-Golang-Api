@@ -1,6 +1,6 @@
 -- +goose Up
 -- +goose StatementBegin
-CREATE TABLE IF NOT EXISTS Purchases(
+CREATE TABLE IF NOT EXISTS Orders(
     Id int primary key auto_increment,
 	ProductId          int NOT NULL,
 	BrandId            int NOT NULL,
@@ -15,5 +15,5 @@ CREATE TABLE IF NOT EXISTS Purchases(
 
 -- +goose Down
 -- +goose StatementBegin
-DROP TABLE Purchases;
+DROP TABLE Orders;
 -- +goose StatementEnd

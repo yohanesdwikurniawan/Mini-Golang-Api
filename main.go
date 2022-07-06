@@ -3,15 +3,15 @@ package main
 import (
 	"Catalys-Tech-Backend-Test/app"
 	"Catalys-Tech-Backend-Test/controller/brandcontroller"
+	"Catalys-Tech-Backend-Test/controller/ordercontroller"
 	"Catalys-Tech-Backend-Test/controller/productcontroller"
-	"Catalys-Tech-Backend-Test/controller/purchasecontroller"
 	"Catalys-Tech-Backend-Test/helper"
 	"Catalys-Tech-Backend-Test/repository/brandrepository"
+	"Catalys-Tech-Backend-Test/repository/orderrepository"
 	"Catalys-Tech-Backend-Test/repository/productrepository"
-	"Catalys-Tech-Backend-Test/repository/purchaserepository"
 	"Catalys-Tech-Backend-Test/service/brandservice"
+	"Catalys-Tech-Backend-Test/service/orderservice"
 	"Catalys-Tech-Backend-Test/service/productservice"
-	"Catalys-Tech-Backend-Test/service/purchaseservice"
 	"embed"
 	"net/http"
 
@@ -37,11 +37,11 @@ func main() {
 	productservice := productservice.NewProductService(productrepository, dbConnection, validate)
 	productcontroller := productcontroller.NewProductController(productservice)
 
-	purchaserepository := purchaserepository.NewPurchaseRepository()
-	purchaseservice := purchaseservice.NewPurchaseService(purchaserepository, dbConnection, validate)
-	purchasecontroller := purchasecontroller.NewPurchaseController(purchaseservice)
+	orderrepository := orderrepository.NewOrderRepository()
+	orderservice := orderservice.NewOrderService(orderrepository, dbConnection, validate)
+	ordercontroller := ordercontroller.NewOrderController(orderservice)
 
-	router := app.AllRouter(brandcontroller, productcontroller, purchasecontroller)
+	router := app.AllRouter(brandcontroller, productcontroller, ordercontroller)
 
 	server := http.Server{
 		Addr:    "localhost:3000",

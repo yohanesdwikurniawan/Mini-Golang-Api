@@ -2,7 +2,7 @@ package domain
 
 import "time"
 
-type Purchase struct {
+type Order struct {
 	Id         int32
 	ProductId  int32
 	BrandId    int32

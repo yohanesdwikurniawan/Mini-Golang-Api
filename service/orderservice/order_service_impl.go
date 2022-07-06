@@ -1,4 +1,4 @@
-package purchaseservice
+package orderservice
 
 import (
 	"Catalys-Tech-Backend-Test/exception"
@@ -6,28 +6,28 @@ import (
 	"Catalys-Tech-Backend-Test/model/domain"
 	"Catalys-Tech-Backend-Test/model/request"
 	"Catalys-Tech-Backend-Test/model/response"
-	"Catalys-Tech-Backend-Test/repository/purchaserepository"
+	"Catalys-Tech-Backend-Test/repository/orderrepository"
 	"context"
 	"database/sql"
 
 	"github.com/go-playground/validator/v10"
 )
 
-type PurchaseServiceImpl struct {
-	PurchaseRepository purchaserepository.PurchaseRepository
+type OrderServiceImpl struct {
+	OrderRepository orderrepository.OrderRepository
 	DB                 *sql.DB
 	Validate           *validator.Validate
 }
 
-func NewPurchaseService(purchaseRepository purchaserepository.PurchaseRepository, DB *sql.DB, validate *validator.Validate) PurchaseService {
-	return &PurchaseServiceImpl{
-		PurchaseRepository: purchaseRepository,
+func NewOrderService(orderRepository orderrepository.OrderRepository, DB *sql.DB, validate *validator.Validate) OrderService {
+	return &OrderServiceImpl{
+		OrderRepository: orderRepository,
 		DB:                 DB,
 		Validate:           validate,
 	}
 }
 
-func (service *PurchaseServiceImpl) Insert(ctx context.Context, request request.PurchaseCreateRequest) response.PurchaseResponse {
+func (service *OrderServiceImpl) Insert(ctx context.Context, request request.OrderCreateRequest) response.OrderResponse {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -35,7 +35,7 @@ func (service *PurchaseServiceImpl) Insert(ctx context.Context, request request.
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	purchase := domain.Purchase{
+	order := domain.Order{
 		ProductId:  request.ProductId,
 		BrandId:    request.BrandId,
 		ProductQty: request.ProductQty,
@@ -43,19 +43,19 @@ func (service *PurchaseServiceImpl) Insert(ctx context.Context, request request.
 		TotalPrice: request.TotalPrice,
 	}
 
-	purchase = service.PurchaseRepository.Insert(ctx, tx, purchase)
-	return helper.ToPurchaseResponse(purchase)
+	order = service.OrderRepository.Insert(ctx, tx, order)
+	return helper.ToOrderResponse(order)
 }
 
-func (service *PurchaseServiceImpl) FindById(ctx context.Context, purchaseId int32) response.PurchaseResponse {
+func (service *OrderServiceImpl) FindById(ctx context.Context, orderId int32) response.OrderResponse {
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	purchase, err := service.PurchaseRepository.FindById(ctx, tx, purchaseId)
+	order, err := service.OrderRepository.FindById(ctx, tx, orderId)
 	if err != nil {
 		panic(exception.NewNotFoundError(err.Error()))
 	}
 
-	return helper.ToPurchaseResponse(purchase)
+	return helper.ToOrderResponse(order)
 }
