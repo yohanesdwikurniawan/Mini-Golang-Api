@@ -7,6 +7,6 @@ import (
 )
 
 type OrderRepository interface {
-	Insert(ctx context.Context, tx *sql.Tx, order domain.Order) domain.Order
+	Insert(ctx context.Context, tx *sql.Tx, order domain.Order) (domain.Order, error)
 	FindById(ctx context.Context, tx *sql.Tx, orderId int32) (domain.Order, error)
 }

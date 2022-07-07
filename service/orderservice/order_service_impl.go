@@ -43,7 +43,9 @@ func (service *OrderServiceImpl) Insert(ctx context.Context, request request.Ord
 		TotalPrice: request.TotalPrice,
 	}
 
-	order = service.OrderRepository.Insert(ctx, tx, order)
+	order, err = service.OrderRepository.Insert(ctx, tx, order)
+	helper.PanicIfError(err)
+
 	return helper.ToOrderResponse(order)
 }
 

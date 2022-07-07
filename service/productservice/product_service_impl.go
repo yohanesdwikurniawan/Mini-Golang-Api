@@ -41,7 +41,9 @@ func (service *ProductServiceImpl) Insert(ctx context.Context, request request.P
 		BrandId: request.BrandId,
 	}
 
-	product = service.ProductRepository.Insert(ctx, tx, product)
+	product, err = service.ProductRepository.Insert(ctx, tx, product)
+	helper.PanicIfError(err)
+
 	return helper.ToProductResponse(product)
 }
 
@@ -63,7 +65,10 @@ func (service *ProductServiceImpl) FindAllProductByBrandId(ctx context.Context, 
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	products := service.ProductRepository.FindAllProductByBrandId(ctx, tx, brandId)
+	products, err := service.ProductRepository.FindAllProductByBrandId(ctx, tx, brandId)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	return helper.ToProductResponses(products)
 }

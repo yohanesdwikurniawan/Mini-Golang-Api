@@ -38,6 +38,8 @@ func (service *BrandServiceImpl) Insert(ctx context.Context, request request.Bra
 		Name: request.Name,
 	}
 
-	brand = service.BrandRepository.Insert(ctx, tx, brand)
+	brand, err = service.BrandRepository.Insert(ctx, tx, brand)
+	helper.PanicIfError(err)
+	
 	return helper.ToBrandResponse(brand)
 }

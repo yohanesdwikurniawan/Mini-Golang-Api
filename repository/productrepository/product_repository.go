@@ -7,7 +7,7 @@ import (
 )
 
 type ProductRepository interface {
-	Insert(ctx context.Context, tx *sql.Tx, product domain.Product) domain.Product
+	Insert(ctx context.Context, tx *sql.Tx, product domain.Product) (domain.Product, error)
 	FindById(ctx context.Context, tx *sql.Tx, productId int32) (domain.Product, error)
-	FindAllProductByBrandId(ctx context.Context, tx *sql.Tx, brandId int32) []domain.Product
+	FindAllProductByBrandId(ctx context.Context, tx *sql.Tx, brandId int32) ([]domain.Product, error)
 }

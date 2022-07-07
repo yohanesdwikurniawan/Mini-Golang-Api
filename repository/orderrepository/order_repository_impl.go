@@ -16,7 +16,7 @@ func NewOrderRepository() OrderRepository {
 	return &OrderRepositoryImpl{}
 }
 
-func (repository *OrderRepositoryImpl) Insert(ctx context.Context, tx *sql.Tx, order domain.Order) domain.Order {
+func (repository *OrderRepositoryImpl) Insert(ctx context.Context, tx *sql.Tx, order domain.Order) (domain.Order, error) {
 	script := "INSERT INTO orders(productId, brandId, productQty, unitPrice, totalPrice) VALUES (?, ?, ?, ?, ?)"
 	result, err := tx.ExecContext(ctx, script, order.ProductId, order.BrandId, order.ProductQty, order.UnitPrice, order.TotalPrice)
 	helper.PanicIfError(err)
@@ -25,7 +25,7 @@ func (repository *OrderRepositoryImpl) Insert(ctx context.Context, tx *sql.Tx, o
 	helper.PanicIfError(err)
 
 	order.Id = int32(id)
-	return order
+	return order, nil
 }
 
 func (repository *OrderRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, orderId int32) (domain.Order, error) {

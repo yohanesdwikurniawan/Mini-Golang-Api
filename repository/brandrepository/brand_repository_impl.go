@@ -14,7 +14,7 @@ func NewBrandRepository() BrandRepository {
 	return &BrandRepositoryImpl{}
 }
 
-func (repository *BrandRepositoryImpl) Insert(ctx context.Context, tx *sql.Tx, brand domain.Brand) domain.Brand {
+func (repository *BrandRepositoryImpl) Insert(ctx context.Context, tx *sql.Tx, brand domain.Brand) (domain.Brand, error) {
 	script := "INSERT INTO brands(name) VALUES (?)"
 	result, err := tx.ExecContext(ctx, script, brand.Name)
 	helper.PanicIfError(err)
@@ -23,5 +23,5 @@ func (repository *BrandRepositoryImpl) Insert(ctx context.Context, tx *sql.Tx, b
 	helper.PanicIfError(err)
 
 	brand.Id = int32(id)
-	return brand
+	return brand, nil
 }

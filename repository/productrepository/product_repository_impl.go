@@ -16,7 +16,7 @@ func NewProductRepository() ProductRepository {
 	return &ProductRepositoryImpl{}
 }
 
-func (repository *ProductRepositoryImpl) Insert(ctx context.Context, tx *sql.Tx, product domain.Product) domain.Product {
+func (repository *ProductRepositoryImpl) Insert(ctx context.Context, tx *sql.Tx, product domain.Product) (domain.Product, error) {
 	script := "INSERT INTO products(name, price, brandId) VALUES (?, ?, ?)"
 	result, err := tx.ExecContext(ctx, script, product.Name, product.Price, product.BrandId)
 	helper.PanicIfError(err)
@@ -25,7 +25,7 @@ func (repository *ProductRepositoryImpl) Insert(ctx context.Context, tx *sql.Tx,
 	helper.PanicIfError(err)
 
 	product.Id = int32(id)
-	return product
+	return product, nil
 }
 
 func (repository *ProductRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, productId int32) (domain.Product, error) {
@@ -46,7 +46,7 @@ func (repository *ProductRepositoryImpl) FindById(ctx context.Context, tx *sql.T
 	}
 }
 
-func (repository *ProductRepositoryImpl) FindAllProductByBrandId(ctx context.Context, tx *sql.Tx, brandId int32) []domain.Product {
+func (repository *ProductRepositoryImpl) FindAllProductByBrandId(ctx context.Context, tx *sql.Tx, brandId int32) ([]domain.Product, error) {
 	script := "SELECT id, name, price, brandId FROM products WHERE brandId = ?"
 	rows, err := tx.QueryContext(ctx, script, brandId)
 	helper.PanicIfError(err)
@@ -59,5 +59,5 @@ func (repository *ProductRepositoryImpl) FindAllProductByBrandId(ctx context.Con
 		helper.PanicIfError(err)
 		products = append(products, product)
 	}
-	return products
+	return products, nil
 }
