@@ -40,6 +40,6 @@ func (repository *OrderRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx,
 		helper.PanicIfError(err)
 		return order, nil
 	} else {
-		return order, errors.New("Id " + strconv.Itoa(int(order.Id)) + " Not Found")
+		return order, errors.New("Id " + strconv.Itoa(int(orderId)) + " Not Found")
 	}
 }

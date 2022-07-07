@@ -1,7 +1,6 @@
 package productservice
 
 import (
-	"Catalyst-Tech-Backend-Test/exception"
 	"Catalyst-Tech-Backend-Test/helper"
 	"Catalyst-Tech-Backend-Test/model/domain"
 	"Catalyst-Tech-Backend-Test/model/request"
@@ -53,9 +52,7 @@ func (service *ProductServiceImpl) FindById(ctx context.Context, productId int32
 	defer helper.CommitOrRollback(tx)
 
 	product, err := service.ProductRepository.FindById(ctx, tx, productId)
-	if err != nil {
-		panic(exception.NewNotFoundError(err.Error()))
-	}
+	helper.PanicIfError(err)
 
 	return helper.ToProductResponse(product)
 }
@@ -66,9 +63,7 @@ func (service *ProductServiceImpl) FindAllProductByBrandId(ctx context.Context, 
 	defer helper.CommitOrRollback(tx)
 
 	products, err := service.ProductRepository.FindAllProductByBrandId(ctx, tx, brandId)
-	if err != nil {
-		panic(exception.NewNotFoundError(err.Error()))
-	}
+	helper.PanicIfError(err)
 
 	return helper.ToProductResponses(products)
 }

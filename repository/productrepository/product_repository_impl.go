@@ -42,7 +42,7 @@ func (repository *ProductRepositoryImpl) FindById(ctx context.Context, tx *sql.T
 		return product, nil
 	} else {
 		// tidak ada
-		return product, errors.New("Id " + strconv.Itoa(int(product.Id)) + " Not Found")
+		return product, errors.New("Id " + strconv.Itoa(int(productId)) + " Not Found")
 	}
 }
 

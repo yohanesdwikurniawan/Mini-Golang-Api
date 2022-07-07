@@ -1,7 +1,6 @@
 package orderservice
 
 import (
-	"Catalyst-Tech-Backend-Test/exception"
 	"Catalyst-Tech-Backend-Test/helper"
 	"Catalyst-Tech-Backend-Test/model/domain"
 	"Catalyst-Tech-Backend-Test/model/request"
@@ -55,9 +54,7 @@ func (service *OrderServiceImpl) FindById(ctx context.Context, orderId int32) re
 	defer helper.CommitOrRollback(tx)
 
 	order, err := service.OrderRepository.FindById(ctx, tx, orderId)
-	if err != nil {
-		panic(exception.NewNotFoundError(err.Error()))
-	}
+	helper.PanicIfError(err)
 
 	return helper.ToOrderResponse(order)
 }
