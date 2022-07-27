@@ -1,4 +1,4 @@
-# Catalyst-Tech-Backend-Test
+# Mini-Golang-Api
 
 assumption
 1. brandId and productId always focus on existing brands and products
